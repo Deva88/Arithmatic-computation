@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
-echo "enter the Three numbers :"
+echo "enter the numbers for arithmetic computation"
 read a b c
-echo The Numbers are :: $a $b $c
+
+result1=$(($a+$b*$c))
+echo $result1
