@@ -29,10 +29,9 @@ dr[d]=$result4
 
 for((i=0;i<$(($count-1));i++))
 do
-for((j=$(($i+1));j<count;j++))
+for((j=$(($i+1));j<$count;j++))
 do
-if((${ar[i]}<${ar[j]}))
-then
+if ((${ar[i]}>${ar[j]}));then
 temp=${ar[i]}
 ar[$i]=${ar[j]}
 ar[$j]=$temp
