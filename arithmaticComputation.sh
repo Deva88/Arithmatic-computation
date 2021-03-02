@@ -1,34 +1,42 @@
 #!/bin/bash -x
-
-echo "enter the numbers for arithmetic computation"
-#TO TAKING INPUT FROM USER
 read a b c
-
-#COMPUTE ARITHMETIC OPERATION
 result1=$(($a+$b*$c))
-echo "result :" $result1
 result2=$(($a*$b+$c))
-echo "result :" $result2
 result3=$(($c+$a/$b))
-echo "result :" $result3
 result4=$(($a%$b+$c))
-echo "result :" $result4
 
-#TO DECLEAR THE DICTIONARY
-declare -A ar
+declare -A dr
 
-#TO STORE THE DICTIONARY
-ar[result1]=$result1
-ar[result2]=$result2
-ar[result3]=$result3
-ar[result4]=$result4
+dr[a]=$result1
+dr[b]=$result2
+dr[c]=$result3
+dr[d]=$result4
 
-#TO READ THE DICTIONARY VALUE IN ARRAY
-for((i=0; i<=${#ar[@]}; i++))
+
+    VALUES=()
+    count=0
+    for DATA in "${dr[@]}" ; do
+        VALUES+=("${DATA##*:}")
+		  let count++
+    done
+
+		for((i=0;i<count;i++))
+		do
+		   ar[i]=${VALUES[i]}
+      done
+
+		echo="value of dictionary in array is: ${ar[@]}"
+
+for((i=0;i<$(($count-1));i++))
 do
-
-array[i]=${ar[result$((i+1))]}
+for((j=$(($i+1));j<count;j++))
+do
+if((${ar[i]}<${ar[j]}))
+then
+temp=${ar[i]}
+ar[$i]=${ar[j]}
+ar[$j]=$temp
+fi
 done
-#to print all
-
-echo " ${array[@]} "
+done
+echo ${ar[@]}
